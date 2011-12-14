@@ -15,6 +15,7 @@
 ;; python
 
 ;; python-mode
+(message "*********loading python mode")
 (add-to-list 'load-path (concat emacs-root "pythings/python-mode.el-6.0.3"))
 (require 'python-mode)
 

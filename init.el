@@ -6,12 +6,23 @@
 ;;  load top level of my customizations
 ;;--------------------------------------------
 (if (eq system-type 'windows-nt)
-    (defvar home-directory "c:/Users/david/"))
-(if (eq system-type 'darwin) ;; OS X
-    (defvar home-directory "/Users/david/"))
+    ((defvar home-directory "c:/Users/david/")
+     ;; other windows lisp
+))
+;;(if (eq system-type 'darwin) ;; OS X
+;;    (((defvar home-directory "/Users/david/")
+;;     (message "===TRYING TO LOAD OSX STUFF (init)===")
+;;     (load (concat home-directory "emacs/osx.el"))
+;;     )))
+
+(when (eq system-type 'darwin)
+    (defvar home-directory "/Users/david/")
+     (load (concat home-directory "emacs/osx.el")))
+
+
 (if (or (eq system-type 'linux)
 	(eq system-type 'gnu/linux))
-    (defvar home-director "/home/david/"))
+    (defvar home-directory "/home/david/"))
 
 (defvar emacs-root "~/emacs/")
 (add-to-list 'load-path emacs-root) ;; load top emacs folder with my customizations
@@ -38,20 +49,20 @@
 (set-language-environment "UTF-8") ;; because i'm a linguist, i suppose
 
 ;;-------------------------------------------
-;; my functions & OS-specific things
+;;  some environment specific things
 ;;-------------------------------------------
-(if (eq system-type 'darwin)
-    (load-library "osx-defuns")) ;; for Mac OS X
-(if (or (eq system-type 'windows-nt)
-	(eq system-type 'cygwin))
-    (load-library "windows-defuns")) ;; for Windows
+;;(if (eq system-type 'darwin)
+;;    (load-library "osx-defuns")) ;; for Mac OS X
+;;(if (or (eq system-type 'windows-nt)
+;;	(eq system-type 'cygwin))
+;;    (load-library "windows-defuns")) ;; for Windows
 
 ;; load some other various preferences depending on OS
-(if (eq system-type 'darwin)
-    (load-library "osx-prefs"))
-(if (or (eq system-type 'windows-nt)
-	(eq system-type 'cygwin))
-    (load-library "windows-prefs"))
+;;(if (eq system-type 'darwin)
+;;    (load-library "osx-prefs"))
+;;(if (or (eq system-type 'windows-nt)
+;;	(eq system-type 'cygwin))
+;;    (load-library "windows-prefs"))
 
 
 (server-start)
